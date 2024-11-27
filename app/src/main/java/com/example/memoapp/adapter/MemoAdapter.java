@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +21,8 @@ import java.io.File;
 
 public class MemoAdapter extends ListAdapter<Memo, MemoAdapter.MemoHolder> {
 
-    private OnItemClickListener listener;
+    private OnItemClickListener itemClickListener;
+    private OnDeleteClickListener deleteClickListener;
 
     public MemoAdapter() {
         super(DIFF_CALLBACK);
@@ -64,25 +66,34 @@ public class MemoAdapter extends ListAdapter<Memo, MemoAdapter.MemoHolder> {
         } else {
             holder.imageView.setImageResource(R.drawable.ic_placeholder);
         }
+
+        // Handle delete button click
+        holder.btnDelete.setOnClickListener(v -> {
+            if (deleteClickListener != null) {
+                deleteClickListener.onDeleteClick(currentMemo);
+            }
+        });
+
+        // Handle item click for editing
+        holder.itemView.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(currentMemo);
+            }
+        });
     }
 
     class MemoHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewContent;
         private ImageView imageView;
+        private Button btnDelete;
 
         public MemoHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewContent = itemView.findViewById(R.id.text_view_content);
             imageView = itemView.findViewById(R.id.image_view);
-
-            itemView.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (listener != null && position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(getItem(position));
-                }
-            });
+            btnDelete = itemView.findViewById(R.id.btn_delete);
         }
     }
 
@@ -91,6 +102,14 @@ public class MemoAdapter extends ListAdapter<Memo, MemoAdapter.MemoHolder> {
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        this.itemClickListener = listener;
+    }
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(Memo memo);
+    }
+
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        this.deleteClickListener = listener;
     }
 }

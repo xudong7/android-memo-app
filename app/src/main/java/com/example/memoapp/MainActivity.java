@@ -45,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Floating action button to add a new memo
         FloatingActionButton fabAdd = findViewById(R.id.fab_add);
         fabAdd.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddEditMemoActivity.class);
             startActivityForResult(intent, ADD_MEMO_REQUEST);
         });
 
+        // Handle click on memo items to edit
         adapter.setOnItemClickListener(memo -> {
             Intent intent = new Intent(MainActivity.this, AddEditMemoActivity.class);
             intent.putExtra(AddEditMemoActivity.EXTRA_ID, memo.getId());
@@ -59,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra(AddEditMemoActivity.EXTRA_IMAGE_PATH, memo.getImagePath());
             startActivityForResult(intent, EDIT_MEMO_REQUEST);
         });
+
+        // Handle delete button click
+        adapter.setOnDeleteClickListener(memo -> memoViewModel.delete(memo));
     }
 
     @Override

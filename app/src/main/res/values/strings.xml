@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MemoApp</string>
+    <string name="font_small_size">12sp</string>
+    <string name="font_medium_size">18sp</string>
+    <string name="font_large_size">24sp</string>
+    <string name="padding_small_space">6dp</string>
+    <string name="padding_medium_space">12dp</string>
+    <string name="padding_large_space">18dp</string>
+</resources>

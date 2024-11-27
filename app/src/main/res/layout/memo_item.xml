@@ -2,46 +2,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="12dp">
 
+    <!-- Memo Image -->
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="80dp"
         android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
         android:scaleType="centerCrop"
+        android:contentDescription="Memo Image"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/text_view_title" />
 
+    <!-- Memo Title -->
     <TextView
         android:id="@+id/text_view_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/image_view"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_delete"
-        android:paddingEnd="8dp" />
-
-    <TextView
-        android:id="@+id/text_view_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toEndOf="@id/image_view"
-        app:layout_constraintTop_toBottomOf="@id/text_view_title"
-        app:layout_constraintEnd_toStartOf="@id/btn_delete"
-        android:paddingEnd="8dp" />
+        app:layout_constraintTop_toTopOf="@id/image_view"
+        app:layout_constraintEnd_toStartOf="@id/btn_delete" />
 
+    <!-- Delete Button -->
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:padding="6dp"
         android:text="Delete"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/image_view" />
+
+    <!-- Memo Content -->
+    <TextView
+        android:id="@+id/text_view_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:lineSpacingExtra="4dp"
+        android:ellipsize="end"
+        android:maxLines="5"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_view"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
